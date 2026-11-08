@@ -140,7 +140,7 @@ html[dir=ltr] #nav{flex-direction:row-reverse}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-const API_KEY = 'AQ.Ab8RN6K4oPzbT8dw0irxex4pJxB_Bw2P60tzdhb0SMLDC1mrLg';
+const API_KEY = 'AQ.Ab8RN6LEoLFF7-AdUrraWKmjSeO_xI0KC2IqHejwprDoNXKT_g';
 const $=id=>document.getElementById(id);
 let blob=null, groups=[];
 const AR='٠١٢٣٤٥٦٧٨٩', FA='۰۱۲۳۴۵۶۷۸۹';
@@ -468,7 +468,7 @@ function openCycle(c,i){
   const b=$('mbody'); b.textContent=''; b.append(cycleBox(c,i,true));
   $('mdl').onclick=()=>saveCycle(c,i); $('modal').classList.add('on');
 }
-$('[data-dismiss=modal], #mclose').onclick=()=>$('modal').classList.remove('on');
+$('mclose').onclick=()=>$('modal').classList.remove('on');
 $('modal').onclick=e=>{ if(e.target.id==='modal') $('modal').classList.remove('on'); };
 async function saveCycle(c,i){ $('status').textContent=t('جاري تجهيز PDF...'); try{ dlBlob(cname(c,i)+'.pdf',await pdfOf(c,i)); $('status').textContent=''; }catch(e){ $('status').textContent=t('تعذر إنشاء PDF: ')+(e.message||e); } }
 $('zipc').onclick=async()=>{
@@ -476,7 +476,7 @@ $('zipc').onclick=async()=>{
   try{
     const z=new JSZip();
     for(let i=0;i<cycles.length;i++) z.file(cname(cycles[i],i)+'.pdf',await pdfOf(cycles[i],i));
-    dlBlob('الدورات.zip',await z.generateAsync({type:'blobkbar'})); $('status').textContent='';
+    dlBlob('الدورات.zip',await z.generateAsync({type:'blob'})); $('status').textContent='';
   }catch(e){ $('status').textContent=t('تعذر إنشاء الملفات: ')+(e.message||e); }
 };
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
